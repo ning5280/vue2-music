@@ -1,10 +1,10 @@
 import originJsonp from 'jsonp'
 
-export default function jsonp(url, data, option){
+export default function jsonp(url, data, option) {
     url += (url.indexOf('?') < 0 ? '?' : '&') + param(data)
     return new Promise((resolve, reject) => {
         originJsonp(url, option, (err, data) => {
-            if(err){
+            if (!err) {
                 resolve(data)
             } else {
                 reject(err)
@@ -12,11 +12,10 @@ export default function jsonp(url, data, option){
         })
     })
 }
-
 // 拼接参数
 function param(data) {
-    let url = '';
-    for(var key in data) {
+    let url = ''
+    for (var key in data) {
         let value = data[key] !== undefined ? data[key] : ' '
         url += `&${key}=${encodeURIComponent(value)}`
     }

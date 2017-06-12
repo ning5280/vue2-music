@@ -1,12 +1,12 @@
 <template>
   <div class="recommend" ref="recommend">
-    <scroll ref="scroll" class="recommend-content" :data="discList">
+    <div ref="scroll" class="recommend-content">
       <div>
-        <div v-if="recommends.length" class="slider-wrapper" ref="sliderWrapper">
+        <div v-if="recommends.length"  class="slider-wrapper" ref="sliderWrapper">
           <slider>
-            <div v-for="item in recommends">
+            <div v-for="item in recommends" :key="item.id">
               <a :href="item.linkUrl">
-                <img class="needsclick" @load="loadImage" :src="item.picUrl">
+                <img :src="item.picUrl" class="needsclick" >
               </a>
             </div>
           </slider>
@@ -14,36 +14,54 @@
         <div class="recommend-list">
           <h1 class="list-title">热门歌单推荐</h1>
           <ul>
-            <li @click="selectItem(item)" v-for="item in discList" class="item">
+            <li class="item">
               <div class="icon">
-                <img width="60" height="60" v-lazy="item.imgurl">
+                <img width="60" height="60">
               </div>
               <div class="text">
-                <h2 class="name" v-html="item.creator.name"></h2>
-                <p class="desc" v-html="item.dissname"></p>
+                <h2 class="name" ></h2>
+                <p class="desc" ></p>
               </div>
             </li>
           </ul>
         </div>
       </div>
-      <div class="loading-container" v-show="!discList.length">
-        <loading></loading>
+      <div class="loading-container">
+      
       </div>
-    </scroll>
-    <router-view></router-view>
+    </div>
+   
   </div>
 </template>
 
 <script >
-
+import {getRecommend} from 'api/recommend'
+import {ERR_OK} from 'api/config'
+import Slider from 'base/slider/slider'
   export default {
+    name: 'recommend',
     data() {
       return {
         recommends: [],
         discList: []
       }
+    },
+    components: {
+        Slider
+    },
+    created() {
+        this._getRecommend()
+    },
+    methods: {
+          _getRecommend() {
+            getRecommend().then((res) => {
+                if (res.code === ERR_OK) {
+                    console.log(res.data)
+                    this.recommends = res.data.slider
+                }
+            })
+        }
     }
-  
   }
 </script>
 
