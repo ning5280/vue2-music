@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import fastclick from 'fastclick'
+
 // 取消点击延迟三百毫秒*
 Vue.config.productionTip = false
 
