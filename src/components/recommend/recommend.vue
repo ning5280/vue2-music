@@ -1,6 +1,6 @@
 <template>
   <div class="recommend" ref="recommend">
-    <div ref="scroll" class="recommend-content">
+    <scroll ref="scroll" class="recommend-content">
       <div>
         <div v-if="recommends.length"  class="slider-wrapper" ref="sliderWrapper">
           <slider>
@@ -29,7 +29,7 @@
       <div class="loading-container">
       
       </div>
-    </div>
+    </scroll>
    
   </div>
 </template>
@@ -38,6 +38,7 @@
 import {getRecommend, getDiscList} from 'api/recommend'
 import {ERR_OK} from 'api/config'
 import Slider from 'base/slider/slider'
+import Scroll from 'base/scroll/scroll'
   export default {
     name: 'recommend',
     data() {
@@ -47,7 +48,8 @@ import Slider from 'base/slider/slider'
       }
     },
     components: {
-        Slider
+        Slider,
+        Scroll
     },
     created() {
         this._getRecommend()
