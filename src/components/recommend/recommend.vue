@@ -35,7 +35,7 @@
 </template>
 
 <script >
-import {getRecommend} from 'api/recommend'
+import {getRecommend, getDiscList} from 'api/recommend'
 import {ERR_OK} from 'api/config'
 import Slider from 'base/slider/slider'
   export default {
@@ -51,15 +51,19 @@ import Slider from 'base/slider/slider'
     },
     created() {
         this._getRecommend()
+        this._getDiscList()
     },
     methods: {
-          _getRecommend() {
+        _getRecommend() {
             getRecommend().then((res) => {
                 if (res.code === ERR_OK) {
                     console.log(res.data)
                     this.recommends = res.data.slider
                 }
             })
+        },
+        _getDiscList() {
+          getDiscList()
         }
     }
   }
@@ -71,7 +75,7 @@ import Slider from 'base/slider/slider'
   .recommend{
     position: fixed;
     width: 100%;
-    top: 88px;
+    top: 140px;
     bottom: 0;
     .recommend-content{
       height: 100%;
