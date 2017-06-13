@@ -5,8 +5,8 @@
         <div v-if="recommends.length"  class="slider-wrapper" ref="sliderWrapper">
           <slider>
             <div v-for="item in recommends" :key="item.id">
-              <a :href="item.linkUrl">
-                <img :src="item.picUrl" class="needsclick" >
+              <a :href="item.linkUrl" >
+                <img @load="loadImage"  :src="item.picUrl"  class="needsclick">
               </a>
             </div>
           </slider>
@@ -16,7 +16,7 @@
           <ul>
             <li class="item" v-for="item in discList" :key="item.id" >
               <div class="icon">
-                <img width="60" height="60" :src="item.imgurl">
+                <img width="60" height="60" v-lazy="item.imgurl">
               </div>
               <div class="text">
                 <h2 class="name" v-html="item.creator.name"></h2>
@@ -70,7 +70,13 @@ import Scroll from 'base/scroll/scroll'
               this.discList = res.data.list
             }
           })
+        },
+      loadImage() {
+        if (!this.checkloaded) {
+          this.checkloaded = true
+          this.$refs.scroll.refresh()
         }
+      }
     }
   }
 </script>
