@@ -14,13 +14,13 @@
         <div class="recommend-list">
           <h1 class="list-title">热门歌单推荐</h1>
           <ul>
-            <li class="item">
+            <li class="item" v-for="item in discList" :key="item.id" >
               <div class="icon">
-                <img width="60" height="60">
+                <img width="60" height="60" :src="item.imgurl">
               </div>
               <div class="text">
-                <h2 class="name" ></h2>
-                <p class="desc" ></p>
+                <h2 class="name" v-html="item.creator.name"></h2>
+                <p class="desc" v-html="item.dissname"></p>
               </div>
             </li>
           </ul>
@@ -63,7 +63,11 @@ import Slider from 'base/slider/slider'
             })
         },
         _getDiscList() {
-          getDiscList()
+          getDiscList().then((res) => {
+            if (res.code === ERR_OK) {
+              this.discList = res.data.list
+            }
+          })
         }
     }
   }
