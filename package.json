@@ -1,8 +1,8 @@
 {
-  "name": "my-vue-music",
+  "name": "vue-music",
   "version": "1.0.0",
-  "description": "A Vue.js project",
-  "author": "wangning <529023364@qq.com>",
+  "description": "音乐播放器",
+  "author": "ustbhuangyi <280309453@qq.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -70,9 +70,7 @@
     "webpack-merge": "^4.1.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.1",
-    "vconsole": "^2.5.2",
-    "less": "^2.7.2",
-    "less-loader": "^4.0.4"
+    "vconsole": "^2.5.2"
   },
   "engines": {
     "node": ">= 4.0.0",

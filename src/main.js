@@ -1,21 +1,26 @@
 import 'babel-polyfill'
-// 编译新语法 补丁
 import Vue from 'vue'
 import App from './App'
 import router from './router'
 import fastclick from 'fastclick'
-import VueLazyLoad from 'vue-lazyload'
-// 取消点击延迟三百毫秒*
-Vue.config.productionTip = false
+import VueLazyload from 'vue-lazyload'
+import store from './store'
 
-Vue.use(VueLazyLoad, {
-  loading: require('common/image/logo@2x.png')  // 设置懒加载默认图片
-})
+import 'common/stylus/index.styl'
+
+/* eslint-disable no-unused-vars */
+// import vConsole from 'vconsole'
+
 fastclick.attach(document.body)
-// 使body上的点击取消三百毫秒延迟
+
+Vue.use(VueLazyload, {
+  loading: require('common/image/default.png')
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 })
